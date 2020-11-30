@@ -10,16 +10,16 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
-@Table(name="users")
-@JsonIgnoreProperties(value = { "password" }, allowSetters = true)
+@Table(name = "users")
+@JsonIgnoreProperties(value = {"password"}, allowSetters = true)
 public class User {
     @Id
-    @Column(name="username", length = 40)
+    @Column(name = "username", length = 40)
     private String username;
 
 
     //TODO: Make some security hash for password.
-    @Column(name="password", length = 40)
+    @Column(name = "password", length = 40)
     private String password;
 
     public User() {

@@ -24,6 +24,11 @@ public class UsedItem {
     @JoinColumn(name="price_offerId", nullable=false)
     private PriceOffer priceOffer;
 
+    @ManyToOne
+    @JoinColumn(name = "roof_id", nullable = false)
+    private Roof roof;
+
+
     public UsedItem() {
     }
 }
