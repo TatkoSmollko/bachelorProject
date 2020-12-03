@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Table(name = "stores")
+@Entity
 public class Store {
 
     @Id
@@ -20,7 +21,6 @@ public class Store {
     public Store() {
         super();
     }
-
     public Store(List<Item> items, String id) {
         super();
         this.id = id;

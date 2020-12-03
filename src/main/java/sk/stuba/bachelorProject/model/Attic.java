@@ -1,5 +1,8 @@
 package sk.stuba.bachelorProject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -7,6 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "attics")
+@JsonIgnoreProperties(value={ "roof" }, allowSetters=true)
 public class Attic {
 
     @javax.persistence.Id
@@ -16,7 +20,7 @@ public class Attic {
     private String id;
 
     @ManyToOne
-    @JoinColumn(name = "roof_id", nullable = false)
+    @JoinColumn(name = "roof_id")
     private Roof roof;
 
     @Column

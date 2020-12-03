@@ -18,16 +18,20 @@ public class User {
     private String username;
 
 
-    //TODO: Make some security hash for password.
-    @Column(name = "password", length = 40)
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "enabled")
+    private Boolean enabled;
 
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, Boolean enabled) {
+        super();
         this.username = username;
         this.password = password;
+        this.enabled = enabled;
     }
 
     public String getUsername() {
@@ -44,6 +48,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

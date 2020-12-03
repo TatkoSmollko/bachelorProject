@@ -15,6 +15,7 @@ public class Roof {
     }
 
     public Roof(List<Attic> attics, List<Chimney> chimneys, List<UsedItem> items) {
+        super();
         this.attics = attics;
         this.chimneys = chimneys;
         this.items = items;

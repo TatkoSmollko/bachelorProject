@@ -1,4 +1,30 @@
+Hotove :
+
+-Diagramy , zakladna struktura projektu a konfiguracia mavenu
+-Requesty pre attic a roof
+-Requesty v postmanovi
+
+
 
 OTAZKY:
 
 Je jedno ak kodim v anglictine a bakalarku pisem po slovensky?
+
+TODO next week
+
+- dokoncit zakladne endpointy pre vsetky objekty ( getById, getAll, Delete, Post, Put )
+- spring security na prihlasovanie a ziskanie tokenu
+- konfiguracia postmana
+
+
+- pozriet default riesenie pre spring o permissions
+
+swaggerio - generovanie dokumentacie pre api
+
+-zacat pisat samotnu bakalarku - analyza sucastneho stavu problematiky
+                                - spring, lisenie od ostatneho, pouzivatelske vyhody
+                                - react, mySql
+
+- 2 cast - pripravit zakladne modelove diagramy funkcionalne nefunkcionalne poziadavky, use case diagramy
+
+STREDA 9:30

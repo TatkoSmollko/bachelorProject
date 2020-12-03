@@ -13,6 +13,6 @@ public class StoreService {
     @Autowired
     StoreRepository storeRepository;
     public Store createStore(){
-        return storeRepository.save(new Store(new ArrayList<Item>()) );
+        return storeRepository.save(new Store() );
     }
 }
