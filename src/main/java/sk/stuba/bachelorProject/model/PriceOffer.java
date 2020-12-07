@@ -47,6 +47,38 @@ public class PriceOffer {
                 Objects.equals(items, that.items);
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public PriceOfferStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PriceOfferStatus status) {
+        this.status = status;
+    }
+
+    public List<UsedItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<UsedItem> items) {
+        this.items = items;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, customerName, status, items);

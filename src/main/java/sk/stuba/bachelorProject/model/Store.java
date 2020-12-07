@@ -35,6 +35,14 @@ public class Store {
         return items;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

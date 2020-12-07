@@ -20,9 +20,7 @@ public class AtticService {
      * @return saved object with ID
      */
     public Attic createAttic(Attic attic) {
-        System.out.println("");
-
-    return atticRepository.save(attic);
+        return atticRepository.save(attic);
     }
 
     /**
