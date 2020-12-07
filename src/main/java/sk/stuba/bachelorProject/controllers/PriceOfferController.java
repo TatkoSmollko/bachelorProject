@@ -1,10 +1,40 @@
 package sk.stuba.bachelorProject.controllers;
 
+import org.hibernate.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sk.stuba.bachelorProject.model.PriceOffer;
+import sk.stuba.bachelorProject.services.PriceOfferService;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/priceOffer/")
+@RequestMapping("/api/priceOffer/")
 public class PriceOfferController {
+    @Autowired
+    PriceOfferService priceOfferService;
+
+    @PostMapping("createPriceOffer")
+    public PriceOffer createPriceOffer(@RequestBody PriceOffer priceOffer) {
+        return priceOfferService.createPriceOffer(priceOffer);
+    }
+
+    @GetMapping("getPriceOfferById/{id}")
+    public PriceOffer getPriceOfferById(@PathVariable(name = "id") String id) {
+        return priceOfferService.getPriceOfferById(id);
+    }
+
+    @GetMapping("getAllPriceOffers")
+    public List<PriceOffer> getAllPriceOffers() {
+        return priceOfferService.getAllPriceOffers();
+    }
+
+    @DeleteMapping("deletePriceOffer/{id}")
+    public void deletePriceOffer(@PathVariable(name = "id") String id) {
+    }
+    @PutMapping("updatePriceOffer/{id}")
+    public PriceOffer updatePriceOffer(@PathVariable(name = "id") String id,@RequestBody PriceOffer priceOffer) {
+        return priceOfferService.updatePriceOffer(id,priceOffer);
+    }
 }
