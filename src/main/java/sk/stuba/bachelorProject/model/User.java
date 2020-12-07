@@ -3,12 +3,9 @@ package sk.stuba.bachelorProject.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
-
+import java.util.Set;
 @Entity
 @Table(name = "users")
 @JsonIgnoreProperties(value = {"password"}, allowSetters = true)
@@ -24,14 +21,19 @@ public class User {
     @Column(name = "enabled")
     private Boolean enabled;
 
+    @ManyToMany
+    @JoinTable(name = "user_authority", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    private Set<Authority> authorities;
+
     public User() {
     }
 
-    public User(String username, String password, Boolean enabled) {
+    public User(String username, String password, Boolean enabled, Set<Authority> authorities) {
         super();
         this.username = username;
         this.password = password;
         this.enabled = enabled;
+        this.authorities = authorities;
     }
 
     public String getUsername() {
@@ -56,6 +58,14 @@ public class User {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override

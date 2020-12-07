@@ -35,9 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
 
-            auth.jdbcAuthentication().dataSource(primaryDataSource)
-                    .usersByUsernameQuery("select username, password, enabled from users where username=?")
-                    .passwordEncoder(new BCryptPasswordEncoder());
+        auth.jdbcAuthentication().dataSource(primaryDataSource)
+                .usersByUsernameQuery("select username, password, enabled from users where username=?")
+                .authoritiesByUsernameQuery(
+                        "select username, authority from user_authority JOIN authorities ON user_authority.authority_id = authorities.id where username=?")
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
