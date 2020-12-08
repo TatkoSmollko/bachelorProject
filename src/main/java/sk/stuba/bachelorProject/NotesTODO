@@ -12,18 +12,20 @@ Je jedno ak kodim v anglictine a bakalarku pisem po slovensky?
 
 TODO next week
 
-- dokoncit zakladne endpointy pre vsetky objekty ( getById, getAll, Delete, Post, Put )
-- spring security na prihlasovanie a ziskanie tokenu
+- dokoncit zakladne endpointy pre vsetky objekty ( getById, getAll, Delete, Post, Put ) - done
+- spring security na prihlasovanie a ziskanie tokenu - done
 - konfiguracia postmana
 
 
-- pozriet default riesenie pre spring o permissions
+- pozriet default riesenie pre spring o permissions - done
 
 swaggerio - generovanie dokumentacie pre api
 
 -zacat pisat samotnu bakalarku - analyza sucastneho stavu problematiky
                                 - spring, lisenie od ostatneho, pouzivatelske vyhody
                                 - react, mySql
+
+                                -> nezacal som kvoli zapoctu z OS
 
 - 2 cast - pripravit zakladne modelove diagramy funkcionalne nefunkcionalne poziadavky, use case diagramy
 
