@@ -73,12 +73,47 @@ public class PriceOfferService {
     public double calculateAreaOfAttics(List<Attic> attics) {
         double area = 0;
         for (Attic attic : attics) {
-            area += (attic.getFrontHeight()+attic.getRareHeight())*attic.getLength()/2;
-            area += attic.getLength()*attic.getWidth();
+            area += (attic.getFrontHeight() + attic.getRareHeight()) * attic.getLength() / 2;
+            area += attic.getLength() * attic.getWidth();
         }
         return area;
     }
-    public double calculateAreaWithAddedPercents(double area){
-        return area/100*115;
+
+    public double calculateAreaWithAddedPercents(double area) {
+        return area / 100 * 115;
+    }
+
+    /**
+     * @param roof for calculating needed rails
+     * @return number of needed rails
+     */
+    public double calculateNeededRail(Roof roof) {
+        double rails = 0;
+        rails += ((roof.getHeigth() * 2) + (roof.getLength() * 2)) / 2;
+        for (Chimney chimney : roof.getChimneys()) {
+            rails += ((chimney.getHeigth() * 2) + (chimney.getWidth() * 2)) / 2;
+        }
+        return rails;
+    }
+
+    public double calculateNeededFatrafolPlate(Roof roof) {
+        double plates = 0;
+        for (Attic attic : roof.getAttics()) {
+            plates += attic.getLength() / 2.5;
+        }
+        return plates;
+    }
+
+    //TODO zamysliet sa nad moznou chybovostou, pripadne nad vyuzitim pre okap
+    public double getNeededFatrafolRainPlate(Roof roof) {
+        double size = roof.getHeigth() * 2 + roof.getLength() * 2;
+        for (Attic attic : roof.getAttics()) {
+            size -= attic.getLength();
+        }
+        if (size > 0) {
+            return size / 2.5;
+        } else {
+            return 0;
+        }
     }
 }

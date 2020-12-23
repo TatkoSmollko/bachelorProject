@@ -26,7 +26,7 @@ public class ItemService {
         itemToUpdate.setCount(item.getCount());
         itemToUpdate.setPrice(item.getPrice());
         itemToUpdate.setSize(item.getSize());
-        itemToUpdate.setStores(item.getStores());
+        itemToUpdate.setStore(item.getStore());
         return itemRepository.save(itemToUpdate);
     }
 

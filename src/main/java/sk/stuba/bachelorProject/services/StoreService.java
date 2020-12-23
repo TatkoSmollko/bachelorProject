@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.stuba.bachelorProject.model.Item;
 import sk.stuba.bachelorProject.model.Store;
+import sk.stuba.bachelorProject.repositories.ItemRepository;
 import sk.stuba.bachelorProject.repositories.StoreRepository;
 
 import java.util.ArrayList;
@@ -15,8 +16,16 @@ public class StoreService {
     @Autowired
     StoreRepository storeRepository;
 
+    @Autowired
+    ItemRepository itemRepository;
+
     public Store createStore() {
-        return storeRepository.save(new Store());
+        String[] itemNames = {"Rohová lišta", "Fatrafol", "Okapový plech", "Šróby", "Tmel"};
+        Store store =  storeRepository.save(new Store());
+        for(String name : itemNames){
+            itemRepository.save(new Item(store,0,0.0,2.5,name));
+        }
+        return store;
     }
 
     public Store getStoreById(String id) {

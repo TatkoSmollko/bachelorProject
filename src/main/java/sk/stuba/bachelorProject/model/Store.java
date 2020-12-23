@@ -15,7 +15,7 @@ public class Store {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "id", length = 40)
     private String id;
-    @ManyToMany(mappedBy = "stores")
+    @OneToMany(mappedBy = "store")
     private List<Item> items;
 
     public Store() {

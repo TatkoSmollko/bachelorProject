@@ -1,13 +1,14 @@
 package sk.stuba.bachelorProject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "items")
+@JsonIgnoreProperties(value = {"store"}, allowSetters = true)
 public class Item {
 
     @javax.persistence.Id
@@ -15,29 +16,29 @@ public class Item {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "id", length = 40)
     private String id;
-    @ManyToMany
-    @JoinTable(
-            name = "store_item",
-            joinColumns = @JoinColumn(name = "item_id"),
-            inverseJoinColumns = @JoinColumn(name = "store_id"))
-    private List<Store> stores;
+    @ManyToOne
+    @JoinColumn(name = "store_id", nullable = false)
+    private Store store;
     @Column
     private Integer count;
     @Column
     private Double price;
     @Column
     private Double size;
+    @Column
+    private String name;
 
     public Item() {
         super();
     }
 
-    public Item(List<Store> stores, Integer count, Double price, Double size) {
+    public Item(Store stores, Integer count, Double price, Double size, String name) {
         super();
-        this.stores = stores;
+        this.store = stores;
         this.count = count;
         this.price = price;
         this.size = size;
+        this.name = name;
     }
 
     public String getId() {
@@ -48,12 +49,21 @@ public class Item {
         this.id = id;
     }
 
-    public List<Store> getStores() {
-        return stores;
+
+    public String getName() {
+        return name;
     }
 
-    public void setStores(List<Store> stores) {
-        this.stores = stores;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store stores) {
+        this.store = stores;
     }
 
     public Integer getCount() {
@@ -86,7 +96,7 @@ public class Item {
         if (!(o instanceof Item)) return false;
         Item item = (Item) o;
         return Objects.equals(id, item.id) &&
-                Objects.equals(stores, item.stores) &&
+                Objects.equals(store, item.store) &&
                 Objects.equals(count, item.count) &&
                 Objects.equals(price, item.price) &&
                 Objects.equals(size, item.size);
@@ -94,6 +104,6 @@ public class Item {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, stores, count, price, size);
+        return Objects.hash(id, store, count, price, size);
     }
 }
