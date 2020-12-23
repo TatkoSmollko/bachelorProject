@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.bachelorProject.model.PriceOffer;
+import sk.stuba.bachelorProject.model.Roof;
 import sk.stuba.bachelorProject.services.PriceOfferService;
+import sk.stuba.bachelorProject.services.RoofService;
 
 import java.util.List;
 
@@ -14,6 +16,9 @@ import java.util.List;
 public class PriceOfferController {
     @Autowired
     PriceOfferService priceOfferService;
+
+    @Autowired
+    RoofService roofService;
 
     @PostMapping("createPriceOffer")
     public PriceOffer createPriceOffer(@RequestBody PriceOffer priceOffer) {
@@ -36,5 +41,10 @@ public class PriceOfferController {
     @PutMapping("updatePriceOffer/{id}")
     public PriceOffer updatePriceOffer(@PathVariable(name = "id") String id,@RequestBody PriceOffer priceOffer) {
         return priceOfferService.updatePriceOffer(id,priceOffer);
+    }
+    @GetMapping("getValue/{id}")
+    public double getValue(@PathVariable(name = "id")String id){
+        Roof roof = roofService.getRoofById(id);
+        return priceOfferService.calculateNeededFoil(roof);
     }
 }

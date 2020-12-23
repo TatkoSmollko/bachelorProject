@@ -5,36 +5,53 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-
 @Entity
-@Table(name="roofs")
+@Table(name = "roofs")
 public class Roof {
+
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "id", length = 40)
+    private String id;
+    @Column(name = "height")
+    private double heigth;
+    @Column(name = "length")
+    private double length;
+    @OneToMany(mappedBy = "roof")
+    private List<Attic> attics;
+    @OneToMany(mappedBy = "roof")
+    private List<Chimney> chimneys;
+    @OneToMany(mappedBy = "roof")
+    private List<UsedItem> items;
 
     public Roof() {
         super();
     }
 
-    public Roof(List<Attic> attics, List<Chimney> chimneys, List<UsedItem> items) {
-        super();
+    public Roof(double heigth, double length, List<Attic> attics, List<Chimney> chimneys, List<UsedItem> items) {
+        this.heigth = heigth;
+        this.length = length;
         this.attics = attics;
         this.chimneys = chimneys;
         this.items = items;
     }
 
-    @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name="uuid",strategy = "uuid2")
-    @Column(name="id",length = 40)
-    private String id;
+    public double getHeigth() {
+        return heigth;
+    }
 
-    @OneToMany(mappedBy="roof")
-    private List<Attic> attics;
+    public void setHeigth(double heigth) {
+        this.heigth = heigth;
+    }
 
-    @OneToMany(mappedBy="roof")
-    private List<Chimney> chimneys;
+    public double getLength() {
+        return length;
+    }
 
-    @OneToMany(mappedBy="roof")
-    private List<UsedItem> items;
+    public void setLength(double length) {
+        this.length = length;
+    }
 
     public String getId() {
         return id;
@@ -59,6 +76,7 @@ public class Roof {
     public void setChimneys(List<Chimney> chimneys) {
         this.chimneys = chimneys;
     }
+
 
     public List<UsedItem> getItems() {
         return items;

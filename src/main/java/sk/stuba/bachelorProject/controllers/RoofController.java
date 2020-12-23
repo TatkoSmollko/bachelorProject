@@ -16,7 +16,7 @@ public class RoofController {
     RoofService roofService;
 
     @PostMapping("/createRoof")
-    private Roof createRoof(Roof roof) {
+    private Roof createRoof(@RequestBody  Roof roof) {
         return roofService.createRoof(roof);
     }
 

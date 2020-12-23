@@ -14,6 +14,7 @@ public class RoofService {
     RoofRepository roofRepository;
 
     public Roof createRoof(Roof roof) {
+        System.out.println(roof.getHeigth());
         return roofRepository.save(roof);
     }
 

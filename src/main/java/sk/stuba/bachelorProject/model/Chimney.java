@@ -1,5 +1,6 @@
 package sk.stuba.bachelorProject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "chimneys")
+@JsonIgnoreProperties(value = {"roof"}, allowSetters = true)
 public class Chimney {
     @javax.persistence.Id
     @GeneratedValue(generator = "uuid")
@@ -15,10 +17,10 @@ public class Chimney {
     private String Id;
 
     @Column
-    private Long width;
+    private Double width;
 
     @Column
-    private Long heigth;
+    private Double heigth;
 
     @ManyToOne
     @JoinColumn(name = "roof_id", nullable = false)
@@ -33,19 +35,19 @@ public class Chimney {
         Id = id;
     }
 
-    public Long getWidth() {
+    public Double getWidth() {
         return width;
     }
 
-    public void setWidth(Long width) {
+    public void setWidth(Double width) {
         this.width = width;
     }
 
-    public Long getHeigth() {
+    public Double getHeigth() {
         return heigth;
     }
 
-    public void setHeigth(Long heigth) {
+    public void setHeigth(Double heigth) {
         this.heigth = heigth;
     }
 

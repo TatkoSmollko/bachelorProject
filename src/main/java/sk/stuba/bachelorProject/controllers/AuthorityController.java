@@ -11,7 +11,7 @@ import sk.stuba.bachelorProject.services.AuthorityService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/authority/")
+@RequestMapping("authority/")
 public class AuthorityController {
     @Autowired
     AuthorityService authorityService;

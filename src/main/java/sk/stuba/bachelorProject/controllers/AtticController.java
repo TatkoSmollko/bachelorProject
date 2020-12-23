@@ -12,32 +12,32 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/attics")
+@RequestMapping("/api/attics/")
 public class AtticController {
     @Autowired
     AtticService atticService;
 
-    @PostMapping("/create")
+    @PostMapping("create")
     private Attic createAttic(@RequestBody Attic attic) {
         return atticService.createAttic(attic);
     }
 
-    @PutMapping("/updateAttic/{id}")
+    @PutMapping("updateAttic/{id}")
     public Attic updateAttic(@PathVariable(name = "id") String id, @RequestBody Attic attic) {
         return atticService.updateAttic(id, attic);
     }
 
-    @GetMapping("/getAtticById/{id}")
+    @GetMapping("getAtticById/{id}")
     public Attic getAtticById(@PathVariable(name = "id") String id) {
         return atticService.getAtticById(id);
     }
 
-    @GetMapping("/getAllAtticsByRoofId/{id}")
+    @GetMapping("getAllAtticsByRoofId/{id}")
     public List<Attic> getAllAtticsByRoofId(@PathVariable(name = "id") String roofId) {
         return atticService.getAllAtticsByRoofId(roofId);
     }
 
-    @DeleteMapping("/deleteAttic/{id}")
+    @DeleteMapping("deleteAttic/{id}")
     public ResponseEntity deleteAttic(@PathVariable(name = "id") String atticId) {
         return atticService.deleteAttic(atticId);
     }

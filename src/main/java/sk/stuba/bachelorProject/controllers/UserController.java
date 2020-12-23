@@ -9,7 +9,7 @@ import sk.stuba.bachelorProject.services.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     UserService userService;
