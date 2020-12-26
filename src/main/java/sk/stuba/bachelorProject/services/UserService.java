@@ -1,5 +1,6 @@
 package sk.stuba.bachelorProject.services;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import sk.stuba.bachelorProject.model.User;
 import sk.stuba.bachelorProject.repositories.UserRepository;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -14,6 +16,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    XlsService xlsService;
 
     public User createUser(User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));

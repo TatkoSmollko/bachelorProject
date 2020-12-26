@@ -14,8 +14,12 @@ public class RoofService {
     RoofRepository roofRepository;
 
     public Roof createRoof(Roof roof) {
-        System.out.println(roof.getHeigth());
         return roofRepository.save(roof);
+    }
+
+    public Roof updateUsedItemsOfRoof(String roofId){
+        Roof roof = roofRepository.getOne(roofId);
+        return roof;
     }
 
     public Roof getRoofById(String id) {

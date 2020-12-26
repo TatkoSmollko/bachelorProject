@@ -26,7 +26,6 @@ swaggerio - generovanie dokumentacie pre api
                                 - react, mySql
 
                                 -> nezacal som kvoli zapoctu z OS
-
 - 2 cast - pripravit zakladne modelove diagramy funkcionalne nefunkcionalne poziadavky, use case diagramy
 
 STREDA 9:30
@@ -51,3 +50,17 @@ Pri vytvoreni kazdehu skladu pridat defaultne polozky pouzivane pri vyrobe strec
 
 TODO NEEDED QUESTINONS FATHER?
 - listy maju 2 alebo 2,5 metra?
+
+TODO 27.12.
+
+dorobit postConstruct - default user, default authority, default vsetky polozky, default sklad
+    - v default sklade je potrebne mat vsetky itemy, ktore mozu existovat v nejakych skladoch a potrebujem ich na vypocitanie strechy.
+vytvorenej streche do DB treba vediet pridat vypocitane usedItems. Tieto sa budu naplnat pomocou tych zo skladu.
+treba dorobit, aby kazda cenova ponuka z DB mala medzi usedItems tie co ma strecha.
+5. potrebne doplnit cestu k novemu xlsku
+
+1. request na vytvorenie prazdnej strechy s rozmermi
+2. requesty na vytvorenie atik
+3. requesty na vytvorenie kominov
+4. request na vypocitanie list, plechov, fatrafolu, riny ( tento request setne streche usedItems) - parentItem sa v kazdej metode setne podla default item
+

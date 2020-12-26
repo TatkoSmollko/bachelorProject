@@ -3,11 +3,9 @@ package sk.stuba.bachelorProject.services;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sk.stuba.bachelorProject.model.Attic;
-import sk.stuba.bachelorProject.model.Chimney;
-import sk.stuba.bachelorProject.model.PriceOffer;
-import sk.stuba.bachelorProject.model.Roof;
+import sk.stuba.bachelorProject.model.*;
 import sk.stuba.bachelorProject.repositories.PriceOfferRepository;
+import sk.stuba.bachelorProject.repositories.RoofRepository;
 
 import java.util.List;
 
@@ -16,7 +14,15 @@ public class PriceOfferService {
     @Autowired
     PriceOfferRepository priceOfferRepository;
 
-    public PriceOffer createPriceOffer(PriceOffer priceOffer) {
+    @Autowired
+    RoofRepository roofRepository;
+
+    public PriceOffer createPriceOffer(PriceOffer priceOffer, String roofId) {
+        Roof roof = roofRepository.findById(roofId).orElseThrow(() -> new ObjectNotFoundException("id", roofId));
+        priceOffer.setCustomerName("JozkoVago");
+        for(UsedItem item : roof.getItems()){
+            priceOffer.getItems().add(item);
+        }
         return priceOfferRepository.save(priceOffer);
     }
 
@@ -49,6 +55,8 @@ public class PriceOfferService {
         double downArea = roof.getHeigth() * roof.getLength();
         downArea += calculateAreaOfChimneys(roof.getChimneys());
         downArea += calculateAreaOfAttics(roof.getAttics());
+        roof.getItems().add(new UsedItem())
+        roofRepository.save(roof);
         return calculateAreaWithAddedPercents(downArea);
     }
 
@@ -104,6 +112,10 @@ public class PriceOfferService {
         return plates;
     }
 
+    /**
+     * @param roof for calculating of needed rainPlates
+     * @return number of needed meters of rainPlates. It is calculating using sides of roof without attic.
+     */
     //TODO zamysliet sa nad moznou chybovostou, pripadne nad vyuzitim pre okap
     public double getNeededFatrafolRainPlate(Roof roof) {
         double size = roof.getHeigth() * 2 + roof.getLength() * 2;
