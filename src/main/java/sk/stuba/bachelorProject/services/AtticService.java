@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import sk.stuba.bachelorProject.model.Attic;
 import sk.stuba.bachelorProject.repositories.AtticRepository;
+import sk.stuba.bachelorProject.repositories.StoreRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +15,9 @@ import java.util.stream.Collectors;
 public class AtticService {
     @Autowired
     AtticRepository atticRepository;
+
+    @Autowired
+    StoreRepository storeRepository;
 
     /**
      * @param attic - object which you want to save into the DB

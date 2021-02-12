@@ -22,7 +22,7 @@ public class PriceOfferController {
 
     @PostMapping("createPriceOffer")
     public PriceOffer createPriceOffer(@RequestBody PriceOffer priceOffer) {
-        return priceOfferService.createPriceOffer(priceOffer);
+        return priceOfferService.createPriceOffer(priceOffer,"87638b14-b5d8-4b11-9eb6-e9ef8ebe2727");
     }
 
     @GetMapping("getPriceOfferById/{id}")

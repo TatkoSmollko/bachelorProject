@@ -56,4 +56,12 @@ public class Store {
     public int hashCode() {
         return Objects.hash(getId(), getItems());
     }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "id='" + id + '\'' +
+                ", items=" + items +
+                '}';
+    }
 }

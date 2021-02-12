@@ -55,7 +55,7 @@ public class PriceOfferService {
         double downArea = roof.getHeigth() * roof.getLength();
         downArea += calculateAreaOfChimneys(roof.getChimneys());
         downArea += calculateAreaOfAttics(roof.getAttics());
-        roof.getItems().add(new UsedItem())
+        roof.getItems().add(new UsedItem());
         roofRepository.save(roof);
         return calculateAreaWithAddedPercents(downArea);
     }
