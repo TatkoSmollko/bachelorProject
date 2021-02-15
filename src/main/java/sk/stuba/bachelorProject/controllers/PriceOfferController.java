@@ -1,5 +1,6 @@
 package sk.stuba.bachelorProject.controllers;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import sk.stuba.bachelorProject.model.Roof;
 import sk.stuba.bachelorProject.services.PriceOfferService;
 import sk.stuba.bachelorProject.services.RoofService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -23,6 +25,11 @@ public class PriceOfferController {
     @PostMapping("createPriceOffer")
     public PriceOffer createPriceOffer(@RequestBody PriceOffer priceOffer) {
         return priceOfferService.createPriceOffer(priceOffer,"87638b14-b5d8-4b11-9eb6-e9ef8ebe2727");
+    }
+
+    @GetMapping("finishPriceOffer")
+    public void finishPriceOffer() throws IOException, InvalidFormatException {
+        priceOfferService.finishPriceOffer("Jano","dsadsad");
     }
 
     @GetMapping("getPriceOfferById/{id}")

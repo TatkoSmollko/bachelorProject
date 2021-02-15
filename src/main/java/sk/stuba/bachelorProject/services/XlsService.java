@@ -8,10 +8,13 @@ import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.hibernate.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.stuba.bachelorProject.model.Item;
 import sk.stuba.bachelorProject.model.PriceOffer;
 import sk.stuba.bachelorProject.model.UsedItem;
+import sk.stuba.bachelorProject.repositories.PriceOfferRepository;
 
 import java.io.*;
 
@@ -19,9 +22,14 @@ import java.io.*;
 @Service
 public class XlsService {
 
-    public void createPriceOfferExcel(String name, PriceOffer priceOffer) throws IOException, InvalidFormatException {
+    @Autowired
+    PriceOfferRepository priceOfferRepository;
+
+    public void createPriceOfferExcel(String name, String priceOfferId) throws IOException, InvalidFormatException {
         //input source excel file which contains sheets to be copied
-        POIFSFileSystem file = new POIFSFileSystem(new FileInputStream(new File("/Users/tomasvago/Downloads/bachelorProject/ponukaVzor.xls")));
+        PriceOffer priceOffer = priceOfferRepository.findById(priceOfferId).orElseThrow(
+                ()->new ObjectNotFoundException("id","PriceOffer"));
+        POIFSFileSystem file = new POIFSFileSystem(new FileInputStream(new File("C:\\Users\\tomas\\Documents\\Bakalarka\\ponukaVzor.xls")));
         HSSFWorkbook workbookinput = new HSSFWorkbook(file);
 
     //output new excel file to which we need to copy the above sheets
@@ -36,7 +44,7 @@ public class XlsService {
         }
 
     //To write your changes to new workbook
-        FileOutputStream out = new FileOutputStream("/Users/tomasvago/Downloads/bachelorProject/ponukaVzor2.xls");
+        FileOutputStream out = new FileOutputStream("C:\\Users\\tomas\\Documents\\Bakalarka\\ponukaVzor2.xls");
         workbookoutput.write(out);
         out.close();
     }

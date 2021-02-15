@@ -67,4 +67,8 @@ Dopisane vytvorenie cenovej ponuky s pouzitymi itemmi
 Workflow: vytvorit prazdnu strechu
           vytvorit komini / atiky
           zavolat metodu na vypocet potrebnych poloziek
-          potrebne polozky treba vypisat do cenovej ponuky excel z "cenovej ponuky v DB pre danu strechu"
+          potrebne polozky treba vypisat do cenovej ponuky excel z "cenovej ponuky v DB pre danu strechu" DONE
+
+TODO ZAJTRA
+Upravit vypocet na sroby, doplnit vsetky potrebne polozky ( vnutorne listy, pasiky na kominy )
+

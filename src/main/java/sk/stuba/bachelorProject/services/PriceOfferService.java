@@ -1,5 +1,6 @@
 package sk.stuba.bachelorProject.services;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import sk.stuba.bachelorProject.model.*;
 import sk.stuba.bachelorProject.repositories.PriceOfferRepository;
 import sk.stuba.bachelorProject.repositories.RoofRepository;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +21,18 @@ public class PriceOfferService {
     @Autowired
     RoofRepository roofRepository;
 
+    @Autowired
+    XlsService xlsService;
+
     public PriceOffer createOffer (PriceOffer priceOffer){
         priceOffer.setCustomerName("Jozko");
         priceOffer.setStatus(PriceOfferStatus.NEW);
         priceOffer.setItems(new ArrayList<>());
         return priceOfferRepository.save(priceOffer);
+    }
+
+    public void finishPriceOffer(String name,String priceOfferId) throws IOException, InvalidFormatException {
+        xlsService.createPriceOfferExcel("Janko","77daa7cb-339f-4bf8-ba1b-f0cc8ecb495f");
     }
 
     public PriceOffer createPriceOffer(PriceOffer priceOffer, String roofId) {
