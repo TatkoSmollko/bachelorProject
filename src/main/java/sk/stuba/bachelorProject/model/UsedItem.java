@@ -1,11 +1,13 @@
 package sk.stuba.bachelorProject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "usedItems")
+@JsonIgnoreProperties(value = {"parentItem", "priceOffer","roof"}, allowSetters = true)
 public class UsedItem {
     @javax.persistence.Id
     @GeneratedValue(generator = "uuid")

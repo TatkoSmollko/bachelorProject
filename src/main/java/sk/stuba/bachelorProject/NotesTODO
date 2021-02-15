@@ -51,11 +51,7 @@ Pri vytvoreni kazdehu skladu pridat defaultne polozky pouzivane pri vyrobe strec
 TODO NEEDED QUESTINONS FATHER?
 - listy maju 2 alebo 2,5 metra?
 
-TODO 27.12.
-
-dorobit postConstruct - default user, default authority, default vsetky polozky, default sklad
     - v default sklade je potrebne mat vsetky itemy, ktore mozu existovat v nejakych skladoch a potrebujem ich na vypocitanie strechy.
-
 vytvorenej streche do DB treba vediet pridat vypocitane usedItems. Tieto sa budu naplnat pomocou tych zo skladu.
 treba dorobit, aby kazda cenova ponuka z DB mala medzi usedItems tie co ma strecha.
 5. potrebne doplnit cestu k novemu xlsku

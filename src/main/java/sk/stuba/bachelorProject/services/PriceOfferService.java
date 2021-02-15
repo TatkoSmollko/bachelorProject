@@ -3,10 +3,12 @@ package sk.stuba.bachelorProject.services;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sk.stuba.bachelorProject.enums.PriceOfferStatus;
 import sk.stuba.bachelorProject.model.*;
 import sk.stuba.bachelorProject.repositories.PriceOfferRepository;
 import sk.stuba.bachelorProject.repositories.RoofRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +18,13 @@ public class PriceOfferService {
 
     @Autowired
     RoofRepository roofRepository;
+
+    public PriceOffer createOffer (PriceOffer priceOffer){
+        priceOffer.setCustomerName("Jozko");
+        priceOffer.setStatus(PriceOfferStatus.NEW);
+        priceOffer.setItems(new ArrayList<>());
+        return priceOfferRepository.save(priceOffer);
+    }
 
     public PriceOffer createPriceOffer(PriceOffer priceOffer, String roofId) {
         Roof roof = roofRepository.findById(roofId).orElseThrow(() -> new ObjectNotFoundException("id", roofId));

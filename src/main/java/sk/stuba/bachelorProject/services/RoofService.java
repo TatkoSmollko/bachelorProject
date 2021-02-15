@@ -3,8 +3,12 @@ package sk.stuba.bachelorProject.services;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sk.stuba.bachelorProject.model.PriceOffer;
 import sk.stuba.bachelorProject.model.Roof;
+import sk.stuba.bachelorProject.model.UsedItem;
+import sk.stuba.bachelorProject.repositories.ItemRepository;
 import sk.stuba.bachelorProject.repositories.RoofRepository;
+import sk.stuba.bachelorProject.repositories.UsedItemRepository;
 
 import java.util.List;
 
@@ -13,8 +17,23 @@ public class RoofService {
     @Autowired
     RoofRepository roofRepository;
 
+    @Autowired
+    PriceOfferService priceOfferService;
+
+    @Autowired
+    ItemRepository itemRepository;
+
+    @Autowired
+    UsedItemRepository usedItemRepository;
+
     public Roof createRoof(Roof roof) {
-        return roofRepository.save(roof);
+        roof = roofRepository.save(roof);
+        UsedItem fatrafol = new UsedItem((int)Math.ceil(priceOfferService.calculateNeededFoil(roof) / 26), itemRepository.findByName("Fatrafol"),priceOfferService.createOffer(new PriceOffer()),roof);
+        fatrafol = usedItemRepository.save(fatrafol);
+        UsedItem fatrafol2 = usedItemRepository.getOne(fatrafol.getId());
+        System.out.println(fatrafol.getParentItem().getName());
+
+        return roof;
     }
 
     public Roof updateUsedItemsOfRoof(String roofId){
