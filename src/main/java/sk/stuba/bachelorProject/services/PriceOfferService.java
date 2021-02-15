@@ -70,6 +70,28 @@ public class PriceOfferService {
     }
 
     /**
+     *
+     * @param roof
+     * @return counted srews . There must be 6 screws in one square meter.
+     */
+    public double calculateNeededScrews(Roof roof){
+        return roof.getHeigth() * roof.getLength()/6;
+    }
+
+    /**
+     *
+     * @param roof
+     * @return count of needed cornerSlats.
+     */
+    public double calculateNeededCornerSlat(Roof roof){
+        Double size=0.0;
+        for(Attic attic: roof.getAttics()){
+            size += attic.getLength();
+        }
+        return size/2.5;
+    }
+
+    /**
      * @param chimneys of actually using roof
      * @return value of needed foil in square meters
      */

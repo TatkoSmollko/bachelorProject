@@ -26,14 +26,18 @@ public class RoofService {
     @Autowired
     UsedItemRepository usedItemRepository;
 
-    public Roof createRoof(Roof roof) {
-        roof = roofRepository.save(roof);
-        UsedItem fatrafol = new UsedItem((int)Math.ceil(priceOfferService.calculateNeededFoil(roof) / 26), itemRepository.findByName("Fatrafol"),priceOfferService.createOffer(new PriceOffer()),roof);
-        fatrafol = usedItemRepository.save(fatrafol);
-        UsedItem fatrafol2 = usedItemRepository.getOne(fatrafol.getId());
-        System.out.println(fatrafol.getParentItem().getName());
-
+    public Roof calculateNeededItems(String roofId) {
+        Roof roof = roofRepository.findById(roofId).orElseThrow(()-> new ObjectNotFoundException("id", roofId));
+        PriceOffer priceOffer =priceOfferService.createOffer(new PriceOffer());
+        usedItemRepository.save(new UsedItem((int)Math.ceil(priceOfferService.calculateNeededFoil(roof) / 26), itemRepository.findByName("Fatrafol"),priceOffer,roof));
+        usedItemRepository.save(new UsedItem((int)Math.ceil(priceOfferService.getNeededFatrafolRainPlate(roof)),itemRepository.findByName("Okapový plech"),priceOffer,roof));
+        usedItemRepository.save(new UsedItem((int)Math.ceil(priceOfferService.calculateNeededScrews(roof)),itemRepository.findByName("Šróby"),priceOffer,roof));
+        usedItemRepository.save(new UsedItem((int)Math.ceil(priceOfferService.calculateNeededCornerSlat(roof)),itemRepository.findByName("Rohová lišta"),priceOffer,roof));
         return roof;
+    }
+
+    public Roof createEmptyRoof(Roof roof) {
+       return roofRepository.save(roof);
     }
 
     public Roof updateUsedItemsOfRoof(String roofId){

@@ -97,23 +97,23 @@ public class PostConstructOperation {
                 sql = "INSERT INTO stores VALUES('" + DEFAULT_STORE_ID + "')";
                 stmt.executeUpdate(sql);
 
-                sql = "INSERT INTO items VALUES('" + DEFAULT_ID_FATRAFOL + "','0', '0','26','"+ DEFAULT_STORE_ID
+                sql = "INSERT INTO items (id,count,price,size,store_id,name) VALUES('" + DEFAULT_ID_FATRAFOL + "','0', '0','26.0','"+ DEFAULT_STORE_ID
                         +"','Fatrafol')";
                 stmt.executeUpdate(sql);
 
-                sql = "INSERT INTO items VALUES('" + DEFAULT_ID_LISTEL + "','0', '0','2.5','"+ DEFAULT_STORE_ID
+                sql = "INSERT INTO items (id,count,price,size,store_id,name) VALUES('" + DEFAULT_ID_LISTEL + "','0', '0','2.5','"+ DEFAULT_STORE_ID
                         +"','Rohová lišta')";
                 stmt.executeUpdate(sql);
 
-                sql = "INSERT INTO items VALUES('" + DEFAULT_ID_SKREW + "','0', '0','1','"+ DEFAULT_STORE_ID
+                sql = "INSERT INTO items (id,count,price,size,store_id,name) VALUES('" + DEFAULT_ID_SKREW + "','0', '0','1','"+ DEFAULT_STORE_ID
                         +"','Šróby')";
                 stmt.executeUpdate(sql);
 
-                sql = "INSERT INTO items VALUES('" + DEFAULT_ID_GUTTER + "','0', '0','2.5','"+ DEFAULT_STORE_ID
+                sql = "INSERT INTO items (id,count,price,size,store_id,name) VALUES('" + DEFAULT_ID_GUTTER + "','0', '0','2.5','"+ DEFAULT_STORE_ID
                         +"','Okapový plech')";
                 stmt.executeUpdate(sql);
 
-                sql = "INSERT INTO items VALUES('" + DEFAULT_ID_LUTE + "','0', '0','1','"+ DEFAULT_STORE_ID
+                sql = "INSERT INTO items (id,count,price,size,store_id,name) VALUES('" + DEFAULT_ID_LUTE + "','0', '0','1.0','"+ DEFAULT_STORE_ID
                         +"','Tmel')";
                 stmt.executeUpdate(sql);
             }
