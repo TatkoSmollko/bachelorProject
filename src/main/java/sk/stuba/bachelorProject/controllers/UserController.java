@@ -1,11 +1,13 @@
 package sk.stuba.bachelorProject.controllers;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.bachelorProject.model.User;
 import sk.stuba.bachelorProject.services.UserService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -25,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/getAllUsers")
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers() throws IOException, InvalidFormatException {
         return userService.getAllUsers();
     }
 

@@ -15,9 +15,14 @@ public class RoofController {
     @Autowired
     RoofService roofService;
 
-    @PostMapping("/createRoof")
-    private Roof createRoof(@RequestBody  Roof roof) {
-        return roofService.createRoof(roof);
+    @PostMapping("/calculateNeededItems/{id}")
+    private Roof createRoof(@PathVariable String id) {
+        return roofService.calculateNeededItems(id);
+    }
+
+    @PostMapping("/createEmptyRoof")
+    private Roof createEmptyRoof(@RequestBody Roof roof){
+        return roofService.createEmptyRoof(roof);
     }
 
     @GetMapping("/getRoofById/{id}")
