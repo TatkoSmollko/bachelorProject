@@ -27,9 +27,9 @@ public class PriceOfferController {
         return priceOfferService.createPriceOffer(priceOffer,"87638b14-b5d8-4b11-9eb6-e9ef8ebe2727");
     }
 
-    @GetMapping("finishPriceOffer")
-    public void finishPriceOffer() throws IOException, InvalidFormatException {
-        priceOfferService.finishPriceOffer("Jano","dsadsad");
+    @GetMapping("finishPriceOffer/{priceOfferId}")
+    public void finishPriceOffer(@PathVariable(name = "priceOfferId") String priceOfferId) throws IOException, InvalidFormatException {
+        priceOfferService.finishPriceOffer("Tomas",priceOfferId);
     }
 
     @GetMapping("getPriceOfferById/{id}")

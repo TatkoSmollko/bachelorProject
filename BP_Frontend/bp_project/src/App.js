@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import $ from 'jquery';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// App Routes
+import Routes from './Routes';
+
+//import { globalVariables } from '../src/styles/app/common/variablesExport.js';
+
+
+// Disable warning "Synchronous XMLHttpRequest on the main thread is deprecated.."
+$.ajaxPrefilter(o => (o.async = true));
+
+class App extends Component {
+  componentDidMount() {
+    document.title = 'FEI Bakalárska práca';
+  }
+
+  componentWillUnmount() {
+    // clearInterval(this.interval);
+  }
+
+  render() {
+    // specify base href from env varible 'WP_BASE_HREF'
+    // use only if application isn't served from the root
+    // for development it is forced to root only
+    /* global WP_BASE_HREF */
+    const basename = process.env.NODE_ENV === 'development' ? '/' : WP_BASE_HREF || '/';
+
+    return (
+      <BrowserRouter basename={basename}>
+        <Routes props={this.props} />
+      </BrowserRouter>
+    );
+  }
 }
 
-export default App;
+export default (App);
