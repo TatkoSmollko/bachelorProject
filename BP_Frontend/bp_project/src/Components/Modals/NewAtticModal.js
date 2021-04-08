@@ -1,40 +1,42 @@
 import React, {useState} from "react";
 import {Modal, ModalHeader,ModalBody, ModalFooter, Button, Form, FormGroup, Label, Input} from "reactstrap";
-import {AddNewFile} from "../Actions/DocumentActions";
 
 
-
-
- const NewModel = (props) =>{
-    const [file, setFile] = useState(null);
-    const [title,setTitle] = useState(String);
-    const [isSelected, setIsSelected] = useState(false);      
+ const AddAttic = (props) =>{
+  
+    const [frontHeight,setfrontHeight] = useState(0);
+    const [rareHeight,setrareHeight] = useState(0);
+    const [width, setWidth] = useState(0);      
+    const [length, setLength] = useState(0); 
 // AddNewFile(data, props, f, addNewFileSuccess, addNewFileError)
     const handleUpload = () => {
-        AddNewFile({title}, props, file,
-             () => {props.getAllModels()},
-             (err,status) => {console.log(err,status)}
-            );
+        console.log("clikam")
     }
     return (
+      
         <Modal isOpen={props.isOpen}>
           <ModalHeader toggle={props.toggleNewFileModal()}>
             <strong>
-             Upload new xml model 
+             Zadajte rozmery pre pridávanie atiky:
             </strong>
           </ModalHeader>
           <ModalBody>
           <Form>
       <FormGroup>
-        <Label for="title">Title</Label>
-        <Input type="text" name="title" id="title" onChange = {e => setTitle(e.target.value)} placeholder="Set the title of xmlModel" />
+        <Label for="frontHeigth">Front Heigth</Label>
+        <Input type="text" name="frontHeigth" id="frontHeigth" onChange = {e => setfrontHeight(e.target.value)} placeholder="Predna vyska atiky" />
+        <Label for="rareHeigth">Rare Heigth</Label>
+        <Input type="text" name="rareHeigth" id="rareHeigth" onChange = {e => setrareHeight(e.target.value)} placeholder="Zadna vyska atiky" />
+        <Label for="width">Width</Label>
+        <Input type="text" name="width" id="width" onChange = {e => setWidth(e.target.value)} placeholder="Sirka strechy" />
+        <Label for="lenth">Length</Label>
+        <Input type="text" name="length" id="length" onChange = {e => setLength(e.target.value)} placeholder="Sirka strechy" />
       </FormGroup>
    
     </Form>
-          <Input type="file" onChange={(event) => {setFile(event.target.files[0]); setIsSelected(true)}} />
           </ModalBody>
           <ModalFooter>
-          <Button onClick={()=>handleUpload()} color="success" disabled={!isSelected} >
+          <Button onClick={()=>handleUpload()} color="success" >
                   Upload
                 </Button>
             <Button
@@ -49,4 +51,4 @@ import {AddNewFile} from "../Actions/DocumentActions";
       );
 }  
 
-export default NewModel;
+export default AddAttic;

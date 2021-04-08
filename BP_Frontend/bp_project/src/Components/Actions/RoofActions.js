@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { apiTarget } from '../Global/globalVariables';
 
-export function createEmptyRoof(data, props) {
+export function createEmptyRoof(data, props, onSuccess) {
   const config = {
     method: 'POST',
     url:  'http://localhost:8080/api/roof/createEmptyRoof',
@@ -14,13 +14,12 @@ export function createEmptyRoof(data, props) {
       access_token: localStorage.getItem('access_token')
       },
       data:data
-   
   };
   axios
     .request(config)
-    .then(() => {
-      console.log('kokot');
-      //props.history.push("/")
+    .then(response => {
+      localStorage.setItem("newRoofId", response.data.id);
+      onSuccess();
     })
     .catch(error => {
       if (error.response !== undefined) {
