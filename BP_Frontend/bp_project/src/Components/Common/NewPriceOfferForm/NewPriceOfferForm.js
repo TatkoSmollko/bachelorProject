@@ -6,7 +6,8 @@ import createEmptyRoof from '../../Actions/RoofActions'
 class NewPriceOfferForm extends Component{
     state = {
         heigth : 0,
-        width : 0
+        width : 0,
+        isOpenAddAttic: false
     }
 
     dataToCreateEmptyRoof = {
