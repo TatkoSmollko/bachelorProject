@@ -6,4 +6,6 @@ import sk.stuba.bachelorProject.model.Item;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item,String> {
+
+    Item findByName(String name);
 }

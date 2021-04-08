@@ -1,14 +1,16 @@
 package sk.stuba.bachelorProject.services;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sk.stuba.bachelorProject.model.Attic;
-import sk.stuba.bachelorProject.model.Chimney;
-import sk.stuba.bachelorProject.model.PriceOffer;
-import sk.stuba.bachelorProject.model.Roof;
+import sk.stuba.bachelorProject.enums.PriceOfferStatus;
+import sk.stuba.bachelorProject.model.*;
 import sk.stuba.bachelorProject.repositories.PriceOfferRepository;
+import sk.stuba.bachelorProject.repositories.RoofRepository;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,7 +18,29 @@ public class PriceOfferService {
     @Autowired
     PriceOfferRepository priceOfferRepository;
 
-    public PriceOffer createPriceOffer(PriceOffer priceOffer) {
+    @Autowired
+    RoofRepository roofRepository;
+
+    @Autowired
+    XlsService xlsService;
+
+    public PriceOffer createOffer (PriceOffer priceOffer){
+        priceOffer.setCustomerName("Jozko");
+        priceOffer.setStatus(PriceOfferStatus.NEW);
+        priceOffer.setItems(new ArrayList<>());
+        return priceOfferRepository.save(priceOffer);
+    }
+
+    public void finishPriceOffer(String name,String priceOfferId) throws IOException, InvalidFormatException {
+        xlsService.createPriceOfferExcel("Janko",priceOfferId);
+    }
+
+    public PriceOffer createPriceOffer(PriceOffer priceOffer, String roofId) {
+        Roof roof = roofRepository.findById(roofId).orElseThrow(() -> new ObjectNotFoundException("id", roofId));
+        priceOffer.setCustomerName("JozkoVago");
+        for(UsedItem item : roof.getItems()){
+            priceOffer.getItems().add(item);
+        }
         return priceOfferRepository.save(priceOffer);
     }
 
@@ -49,7 +73,31 @@ public class PriceOfferService {
         double downArea = roof.getHeigth() * roof.getLength();
         downArea += calculateAreaOfChimneys(roof.getChimneys());
         downArea += calculateAreaOfAttics(roof.getAttics());
+        roof.getItems().add(new UsedItem());
+        roofRepository.save(roof);
         return calculateAreaWithAddedPercents(downArea);
+    }
+
+    /**
+     *
+     * @param roof
+     * @return counted srews . There must be 6 screws in one square meter.
+     */
+    public double calculateNeededScrews(Roof roof){
+        return roof.getHeigth() * roof.getLength()*6;
+    }
+
+    /**
+     *
+     * @param roof
+     * @return count of needed cornerSlats.
+     */
+    public double calculateNeededCornerSlat(Roof roof){
+        Double size=0.0;
+        for(Attic attic: roof.getAttics()){
+            size += attic.getLength();
+        }
+        return size/2.5;
     }
 
     /**
@@ -104,6 +152,10 @@ public class PriceOfferService {
         return plates;
     }
 
+    /**
+     * @param roof for calculating of needed rainPlates
+     * @return number of needed meters of rainPlates. It is calculating using sides of roof without attic.
+     */
     //TODO zamysliet sa nad moznou chybovostou, pripadne nad vyuzitim pre okap
     public double getNeededFatrafolRainPlate(Roof roof) {
         double size = roof.getHeigth() * 2 + roof.getLength() * 2;

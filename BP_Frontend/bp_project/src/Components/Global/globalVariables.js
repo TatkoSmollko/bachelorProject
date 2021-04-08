@@ -1,0 +1,1 @@
+const apiTarget = "http://localhost:8080"

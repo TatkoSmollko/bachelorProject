@@ -1,0 +1,608 @@
+{
+	"info": {
+		"_postman_id": "ceb9c3c0-0963-419b-8a96-f399f0f4245a",
+		"name": "Bakalarka",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "UserControllers",
+			"item": [
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"test2\",\n\t\"password\":\"test\",\n    \"enabled\":\"true\",\n    \"authorities\":[{\n\"id\": \"55facaba-def1-42ca-9ed0-feedb7641851\",\n    \"authority\": \"AppUser\"\n}]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/createUser",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"createUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"accessToken\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "secret",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "mia-dms-gui",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"grant_type\": \"password\", \n    \"username\": \"test2\", \n    \"password\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serverUrl}}/oauth/token",
+							"host": [
+								"{{serverUrl}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ItemControllers",
+			"item": [
+				{
+					"name": "CreateItem",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"store\": {\n        \"id\": \"aede9e26-d9fa-49b5-bdea-60e8e6b55987\"\n    },\n    \"count\": \"0\",\n    \"price\": \"\",\n    \"size\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serverUrl}}/api/item/createItem?access_token={{accessToken}}",
+							"host": [
+								"{{serverUrl}}"
+							],
+							"path": [
+								"api",
+								"item",
+								"createItem"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "StoreControllers",
+			"item": [
+				{
+					"name": "createStore",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"items\":[]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/store/createStore?access_token={{accessToken}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"store",
+								"createStore"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllStores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/store/getAllStores?access_token={{accessToken}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"store",
+								"getAllStores"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AtticControllers",
+			"item": [
+				{
+					"name": "CreateAttic",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roof\":  {\n       \"id\": \"87638b14-b5d8-4b11-9eb6-e9ef8ebe2727\"\n    },\n    \"frontHeight\": \"0.5\",\n    \"rareHeight\": \"0.5\",\n    \"width\": \"0.3\",\n    \"length\": \"10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serverUrl}}/api/attics/create?access_token={{accessToken}}",
+							"host": [
+								"{{serverUrl}}"
+							],
+							"path": [
+								"api",
+								"attics",
+								"create"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllAtticsByRoofId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{serverUrl}}/api/attics/getAllAtticsByRoofId/6059d90b-6bf6-4281-be0e-b4824edbb2f4?access_token={{accessToken}}",
+							"host": [
+								"{{serverUrl}}"
+							],
+							"path": [
+								"api",
+								"attics",
+								"getAllAtticsByRoofId",
+								"6059d90b-6bf6-4281-be0e-b4824edbb2f4"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAtticById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{serverUrl}}/api/attics/getAtticById/2a0e435d-78f6-45d0-af96-69cbe6b490f5?access_token={{accessToken}}",
+							"host": [
+								"{{serverUrl}}"
+							],
+							"path": [
+								"api",
+								"attics",
+								"getAtticById",
+								"2a0e435d-78f6-45d0-af96-69cbe6b490f5"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAttic",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{serverUrl}}/api/attics/deleteAttic/2a0e435d-78f6-45d0-af96-69cbe6b490f5?access_token={{accessToken}}",
+							"host": [
+								"{{serverUrl}}"
+							],
+							"path": [
+								"api",
+								"attics",
+								"deleteAttic",
+								"2a0e435d-78f6-45d0-af96-69cbe6b490f5"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateAttic",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \n        \"frontHeight\": 40.0,\n        \"rareHeight\": 21.0,\n        \"width\": 23.0,\n        \"length\": 23.0\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serverUrl}}/api/attics/updateAttic/0abf7837-64c5-46fc-849d-bf7170c86709?access_token={{accessToken}}",
+							"host": [
+								"{{serverUrl}}"
+							],
+							"path": [
+								"api",
+								"attics",
+								"updateAttic",
+								"0abf7837-64c5-46fc-849d-bf7170c86709"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ChimneyControllers",
+			"item": [
+				{
+					"name": "GetChimneyById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateChimney",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"width\":\"1\",\n    \"heigth\":\"0.5\",\n    \"roof\":{\n         \"id\": \"87638b14-b5d8-4b11-9eb6-e9ef8ebe2727\"\n   }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serverUrl}}/api/chimney/createChimney?access_token={{accessToken}}",
+							"host": [
+								"{{serverUrl}}"
+							],
+							"path": [
+								"api",
+								"chimney",
+								"createChimney"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PriceOfferControllers",
+			"item": [
+				{
+					"name": "priceOfferTest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "RoofControllers",
+			"item": [
+				{
+					"name": "CreateRoof",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attics\": [],\n    \"items\": [],\n    \"chimneys\": [],\n    \"heigth\": 10.0,\n    \"length\": 10.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/roof/createRoof?access_token={{accessToken}}",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"roof",
+								"createRoof"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetRoofById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/roof/b278557b-e90b-49aa-8af0-f82712ad9c55",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"roof",
+								"b278557b-e90b-49aa-8af0-f82712ad9c55"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllRoofs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{serverUrl}}/api/roof/getAllRoofs?access_token={{accessToken}}",
+							"host": [
+								"{{serverUrl}}"
+							],
+							"path": [
+								"api",
+								"roof",
+								"getAllRoofs"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteRoof",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{serverUrl}}/api/roof/deleteRoof/badf482e-c682-4e2f-a181-e6e7d49ebcb9?access_token={{accessToken}}",
+							"host": [
+								"{{serverUrl}}"
+							],
+							"path": [
+								"api",
+								"roof",
+								"deleteRoof",
+								"badf482e-c682-4e2f-a181-e6e7d49ebcb9"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateRoof",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"attics\": [{\n    \"id\": \"0abf7837-64c5-46fc-849d-bf7170c86709\",\n    \"frontHeight\": 22.0,\n    \"rareHeight\": 21.0,\n    \"width\": 23.0,\n    \"length\": 23.0\n}],\n    \"chimneys\": [],\n    \"items\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{serverUrl}}/api/roof/updateRoof/6059d90b-6bf6-4281-be0e-b4824edbb2f4?access_token={{accessToken}}",
+							"host": [
+								"{{serverUrl}}"
+							],
+							"path": [
+								"api",
+								"roof",
+								"updateRoof",
+								"6059d90b-6bf6-4281-be0e-b4824edbb2f4"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "{{accessToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AuthorityControllers",
+			"item": [
+				{
+					"name": "CreateAuthority",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"authority\":\"AppUser\",\n\"Users\":[]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/authority/createAuthority",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"authority",
+								"createAuthority"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
