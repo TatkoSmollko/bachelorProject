@@ -69,6 +69,13 @@ Workflow: vytvorit prazdnu strechu
           zavolat metodu na vypocet potrebnych poloziek
           potrebne polozky treba vypisat do cenovej ponuky excel z "cenovej ponuky v DB pre danu strechu" DONE
 
-TODO ZAJTRA
-Upravit vypocet na sroby, doplnit vsetky potrebne polozky ( vnutorne listy, pasiky na kominy )
+TODO
+doplnit vsetky potrebne polozky ( vnutorne listy, pasiky na kominy )
+
+TODO NEXT WEEK
+LOGIN REACT
+UPRAVIT CAST POZNAMOK
+SPISAT KU IMPLEMENTACII
+
+
 

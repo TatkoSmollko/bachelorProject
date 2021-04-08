@@ -32,7 +32,7 @@ public class PriceOfferService {
     }
 
     public void finishPriceOffer(String name,String priceOfferId) throws IOException, InvalidFormatException {
-        xlsService.createPriceOfferExcel("Janko","77daa7cb-339f-4bf8-ba1b-f0cc8ecb495f");
+        xlsService.createPriceOfferExcel("Janko",priceOfferId);
     }
 
     public PriceOffer createPriceOffer(PriceOffer priceOffer, String roofId) {
@@ -84,7 +84,7 @@ public class PriceOfferService {
      * @return counted srews . There must be 6 screws in one square meter.
      */
     public double calculateNeededScrews(Roof roof){
-        return roof.getHeigth() * roof.getLength()/6;
+        return roof.getHeigth() * roof.getLength()*6;
     }
 
     /**

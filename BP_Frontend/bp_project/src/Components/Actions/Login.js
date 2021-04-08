@@ -1,10 +1,13 @@
-
+import React from 'react';
 import https from "https";
 import axios from "axios";
+import PropTypes from 'prop-types';
+
 
 const apiTarget = "http://localhost:8080"
 
-const login = (userName, Password) => {
+
+const login = (userName, Password,props) => {
 const config = {
     method: "POST",
     url: apiTarget + "/oauth/token",
@@ -15,7 +18,7 @@ const config = {
     }),
 
     headers: {
-        Authorization: "Basic bWlhLWRtcy1ndWk6c2VjcmV0", // + btoa("mia-dms-gui:secret"),
+        Authorization: 'Basic ' + btoa('mia-dms-gui:secret'),
         "Content-Type": "application/json",
     },
     data: {
@@ -44,8 +47,7 @@ axios
         localStorage.setItem("token_type", response.data.token_type);
         localStorage.setItem("user_name", userName);
         localStorage.setItem("is_admin", "");
-        
-        //this.props.history.push("/home");
+        props.history.push('/')
     })
     .catch((err) => {
         if (err.response != null) {
@@ -57,6 +59,12 @@ axios
             console.log(err);
         }
     });
+
+    
+login.propTypes = {
+    router: PropTypes.object,
+    history: PropTypes.object
+  };
 }
 
 
