@@ -18,6 +18,8 @@ public class Roof {
     private double heigth;
     @Column(name = "length")
     private double length;
+    @Column
+    private String priceOfferId;
     @OneToMany(mappedBy = "roof")
     private List<Attic> attics;
     @OneToMany(mappedBy = "roof")
@@ -29,12 +31,13 @@ public class Roof {
         super();
     }
 
-    public Roof(double heigth, double length, List<Attic> attics, List<Chimney> chimneys, List<UsedItem> items) {
+    public Roof(double heigth, double length, List<Attic> attics, List<Chimney> chimneys, List<UsedItem> items,String roofId) {
         this.heigth = heigth;
         this.length = length;
         this.attics = attics;
         this.chimneys = chimneys;
         this.items = items;
+        this.priceOfferId = roofId;
     }
 
     public double getHeigth() {
@@ -49,12 +52,21 @@ public class Roof {
         return length;
     }
 
+
     public void setLength(double length) {
         this.length = length;
     }
 
     public String getId() {
         return id;
+    }
+
+    public String getPriceOfferId() {
+        return priceOfferId;
+    }
+
+    public void setPriceOfferId(String priceOfferId) {
+        this.priceOfferId = priceOfferId;
     }
 
     public void setId(String id) {

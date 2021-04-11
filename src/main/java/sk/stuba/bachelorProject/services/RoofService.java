@@ -33,6 +33,7 @@ public class RoofService {
         usedItemRepository.save(new UsedItem((int)Math.ceil(priceOfferService.getNeededFatrafolRainPlate(roof)),itemRepository.findByName("Okapový plech"),priceOffer,roof));
         usedItemRepository.save(new UsedItem((int)Math.ceil(priceOfferService.calculateNeededScrews(roof)),itemRepository.findByName("Šróby"),priceOffer,roof));
         usedItemRepository.save(new UsedItem((int)Math.ceil(priceOfferService.calculateNeededCornerSlat(roof)),itemRepository.findByName("Rohová lišta"),priceOffer,roof));
+        roof.setPriceOfferId(priceOffer.getId());
         return roof;
     }
 

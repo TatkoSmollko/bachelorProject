@@ -1,16 +1,27 @@
 import React, {useState} from "react";
 import {Modal, ModalHeader,ModalBody, ModalFooter, Button, Form, FormGroup, Label, Input} from "reactstrap";
+import createAttic from "../Actions/AtticActions"
 
 
  const AddAttic = (props) =>{
   
-    const [frontHeight,setfrontHeight] = useState(0);
-    const [rareHeight,setrareHeight] = useState(0);
-    const [width, setWidth] = useState(0);      
-    const [length, setLength] = useState(0); 
+    const [frontHeightAttic,setfrontHeight] = useState(0);
+    const [rareHeightAttic,setrareHeight] = useState(0);
+    const [widthAttic, setWidth] = useState(0);      
+    const [lengthAttic, setLength] = useState(0); 
 // AddNewFile(data, props, f, addNewFileSuccess, addNewFileError)
+    const dataToCreateAttic = {
+        roof:  {
+           id: localStorage.getItem("newRoofId")
+        },
+        frontHeight: frontHeightAttic,
+        rareHeight: rareHeightAttic,
+        width: widthAttic,
+        length: lengthAttic   
+    }
+    
     const handleUpload = () => {
-        console.log("clikam")
+        createAttic(dataToCreateAttic,props)
     }
     return (
       

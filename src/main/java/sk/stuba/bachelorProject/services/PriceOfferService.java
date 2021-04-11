@@ -25,19 +25,19 @@ public class PriceOfferService {
     XlsService xlsService;
 
     public PriceOffer createOffer (PriceOffer priceOffer){
-        priceOffer.setCustomerName("Jozko");
+        priceOffer.setCustomerName(priceOffer.getCustomerName());
         priceOffer.setStatus(PriceOfferStatus.NEW);
         priceOffer.setItems(new ArrayList<>());
         return priceOfferRepository.save(priceOffer);
     }
 
     public void finishPriceOffer(String name,String priceOfferId) throws IOException, InvalidFormatException {
-        xlsService.createPriceOfferExcel("Janko",priceOfferId);
+        xlsService.createPriceOfferExcel(name,priceOfferId);
     }
 
     public PriceOffer createPriceOffer(PriceOffer priceOffer, String roofId) {
         Roof roof = roofRepository.findById(roofId).orElseThrow(() -> new ObjectNotFoundException("id", roofId));
-        priceOffer.setCustomerName("JozkoVago");
+        priceOffer.setCustomerName(priceOffer.getCustomerName());
         for(UsedItem item : roof.getItems()){
             priceOffer.getItems().add(item);
         }

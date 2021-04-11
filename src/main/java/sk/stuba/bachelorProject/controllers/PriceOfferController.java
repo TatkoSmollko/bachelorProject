@@ -22,14 +22,14 @@ public class PriceOfferController {
     @Autowired
     RoofService roofService;
 
-    @PostMapping("createPriceOffer")
-    public PriceOffer createPriceOffer(@RequestBody PriceOffer priceOffer) {
-        return priceOfferService.createPriceOffer(priceOffer,"87638b14-b5d8-4b11-9eb6-e9ef8ebe2727");
+    @PostMapping("createPriceOffer/{roofId}")
+    public PriceOffer createPriceOffer(@RequestBody PriceOffer priceOffer, @PathVariable String roofId) {
+        return priceOfferService.createPriceOffer(priceOffer,roofId);
     }
 
-    @GetMapping("finishPriceOffer/{priceOfferId}")
-    public void finishPriceOffer(@PathVariable(name = "priceOfferId") String priceOfferId) throws IOException, InvalidFormatException {
-        priceOfferService.finishPriceOffer("Tomas",priceOfferId);
+    @GetMapping("finishPriceOffer/{customer}/{priceOfferId}")
+    public void finishPriceOffer(@PathVariable String priceOfferId, @PathVariable String customer) throws IOException, InvalidFormatException {
+        priceOfferService.finishPriceOffer(customer,priceOfferId);
     }
 
     @GetMapping("getPriceOfferById/{id}")

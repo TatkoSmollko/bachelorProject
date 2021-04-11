@@ -1,14 +1,25 @@
 import React, {useState} from "react";
 import {Modal, ModalHeader,ModalBody, ModalFooter, Button, Form, FormGroup, Label, Input} from "reactstrap";
+import createChimney from "../Actions/ChimneyActions"
 
 
  const AddChimney = (props) =>{
-    const [width, setWidth] = useState(0);      
-    const [Heigth, setHeigth] = useState(0); 
-// AddNewFile(data, props, f, addNewFileSuccess, addNewFileError)
-    const handleUpload = () => {
-        console.log("clikam")
+    const [chimneyWidth, setWidth] = useState(0);      
+    const [chimneyHeight, setHeigth] = useState(0); 
+
+    const dataToCreateChimney={
+      width:chimneyWidth,
+      heigth:chimneyHeight,
+      roof:{
+           id: localStorage.getItem('newRoofId')
+     }
     }
+
+    const handleUpload = () => {
+        createChimney(dataToCreateChimney,props);
+    }
+
+
     return (
       
         <Modal isOpen={props.isOpen}>

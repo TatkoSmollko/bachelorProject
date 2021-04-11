@@ -4,8 +4,8 @@ import './NewPriceOfferForm.scss';
 import createEmptyRoof from '../../Actions/RoofActions';
 import AddAttic from '../../Modals/NewAtticModal';
 import createAttic from '../../Actions/AtticActions';
-import createChimney from '../../Actions/ChimneyActions';
 import AddChimney from '../../Modals/NewChimneyModal';
+import finishPriceOffer from '../../Actions/PriceOfferActions'
 
 class NewPriceOfferForm extends Component{
   roofId = "";
@@ -55,6 +55,10 @@ class NewPriceOfferForm extends Component{
       console.log(this.state.id);
     }
 
+    handleFinishPriceOfferProces = (roofId, customer) =>{
+      finishPriceOffer(roofId,customer);
+    }
+
     handleCreationOfAttic = () => {
       createAttic()
     }
@@ -71,11 +75,11 @@ class NewPriceOfferForm extends Component{
                 <TextField id="heigth" label="Zadajte výšku strechy" variant="outlined" onChange = {e => this.setState({length: e.target.value})}/>
               </div> 
               <Button variant="contained" color="default"   onClick={()=> this.startProcessOfPriceOffer()}>Začať proces cenovej ponuky</Button>
-              <Button className="uploadButton" variant="contained" color="default"  onClick= {()=> this.toggleNewModelModal()}>Pridat Attiku</Button>
+              <Button className="uploadButton" variant="contained" color="default"  onClick= {()=> this.toggleNewModelModal()}>Pridať atiku</Button>
               {this.state.isOpenAddAttic && <AddAttic isOpen={this.state.isOpenAddAttic} toggleNewFileModal= {()=> this.toggleNewModelModal}/>}
-              <Button className="uploadButton" variant="contained" color="default"  onClick= {()=> this.toggleNewChimneyModal()}>Pridat Attiku</Button>
+              <Button className="uploadButton" variant="contained" color="default"  onClick= {()=> this.toggleNewChimneyModal()}>Pridať komín</Button>
               {this.state.isOpenAddChimney && <AddChimney isOpen={this.state.isOpenAddChimney} toggleNewFileModal= {()=> this.toggleNewChimneyModal}/>}
-              
+              <Button className="uploadButton" variant="contained" color="default"  onClick= {()=> this.handleFinishPriceOfferProces(localStorage.getItem('newRoofId'),"Customer")}>FinishProcess</Button>
             </div>
         );
 

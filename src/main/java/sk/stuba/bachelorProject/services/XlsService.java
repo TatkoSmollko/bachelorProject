@@ -29,7 +29,7 @@ public class XlsService {
         //input source excel file which contains sheets to be copied
         PriceOffer priceOffer = priceOfferRepository.findById(priceOfferId).orElseThrow(
                 ()->new ObjectNotFoundException("id","PriceOffer"));
-        POIFSFileSystem file = new POIFSFileSystem(new FileInputStream(new File("/Users/tomasvago/Downloads/bachelorProject/ponukaVzor.xls")));
+        POIFSFileSystem file = new POIFSFileSystem(new FileInputStream(new File("/Users/tomasvago/Downloads/BachelorProject/bachelorProject/ponukaVzor.xls")));
         HSSFWorkbook workbookinput = new HSSFWorkbook(file);
 
     //output new excel file to which we need to copy the above sheets
