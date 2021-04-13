@@ -1,25 +1,27 @@
 import axios from 'axios';
 
-export function createChimney(data, props) {
+export function createChimney(data, finish) {
   const config = {
     method: 'POST',
-    url:  'http://localhost:8080/api/chimney/createChimney',
+    url: 'http://localhost:8080/api/chimney/createChimney',
     responseType: 'json',
     headers: {
       Authorization: 'Basic ' + btoa('mia-dms-gui:secret'),
-      "Content-Type": "application/json",
-  },
+      'Content-Type': 'application/json'
+    },
     params: {
       access_token: localStorage.getItem('access_token')
-      },
-      data:data
-   
+    },
+    data: data
   };
   axios
     .request(config)
     .then(() => {
       console.log('Success');
       //props.history.push("/")
+    })
+    .finally(() => {
+      finish();
     })
     .catch(error => {
       if (error.response !== undefined) {
@@ -32,4 +34,32 @@ export function createChimney(data, props) {
     });
 }
 
-export default createChimney;
+export function getAllChimneysByRoofId(roofId, onSuccess) {
+  const config = {
+    method: 'GET',
+    url: 'http://localhost:8080/api/chimney/getAllChimneysByRoofId/' + roofId,
+    responseType: 'json',
+    headers: {
+      Authorization: 'Basic ' + btoa('mia-dms-gui:secret'),
+      'Content-Type': 'application/json'
+    },
+    params: {
+      access_token: localStorage.getItem('access_token')
+    }
+  };
+  axios
+    .request(config)
+    .then(response => {
+      onSuccess(response);
+      //props.history.push("/")
+    })
+    .catch(error => {
+      if (error.response !== undefined) {
+        if (error.response.status === 401) {
+          console.log(error.response);
+        }
+        if (error.response.status === 403) {
+        }
+      }
+    });
+}

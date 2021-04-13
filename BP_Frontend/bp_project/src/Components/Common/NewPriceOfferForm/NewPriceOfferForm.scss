@@ -1,10 +1,29 @@
-.parentDiv{
-    background-color: white;
-    width:70%;
-    height: 400px;
-    margin-top: 2%;
+.parentDiv {
+  background-color: white;
+  width: 70%;
+  height: 400px;
+  margin-top: 2%;
+  text-align: center;
 }
 
-.inputFields{
-    margin:5%;
+.inputFields {
+  margin: 5%;
+}
+
+.info-field {
+  margin: 10px;
+}
+
+.atiky {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  width: 90%;
+  margin-top: 20px;
+  height: 360px;
+}
+
+.updateButt {
+  position: absolute;
+  bottom: 45%;
+  margin-left: 5%;
 }

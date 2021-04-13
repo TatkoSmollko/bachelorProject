@@ -1,20 +1,22 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
-import "../Menu/Menu.scss"
+import '../Menu/Menu.scss';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   paper: {
-    marginRight: theme.spacing(2),
-  },
+    marginRight: theme.spacing(2)
+  }
 }));
 
 export default function MenuListComposition() {
@@ -22,8 +24,9 @@ export default function MenuListComposition() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
 
+  const history = useHistory();
 
-  const handleClose = (event) => {
+  const handleClose = event => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -31,9 +34,9 @@ export default function MenuListComposition() {
     setOpen(false);
   };
 
-  const handleNewPriceOffer = (event,props) => {
-    console.log("kokot");
-    props.history.push('/PriceOffer')
+  const handleRedirect = path => {
+    console.log('kokot');
+    history.push(path);
   };
 
   function handleListKeyDown(event) {
@@ -54,7 +57,7 @@ export default function MenuListComposition() {
   }, [open]);
 
   return (
-    <div className={classes.root,'menuStyle' }>
+    <div className={(classes.root, 'menuStyle')}>
       <Paper className={classes.paper}>
         <MenuList>
           <MenuItem>Cenové ponuky</MenuItem>
@@ -72,8 +75,10 @@ export default function MenuListComposition() {
             >
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                    <MenuItem onClick={handleNewPriceOffer}>Naceniť strechu</MenuItem>
+                  <MenuList autoFocusItem={open} id='menu-list-grow' onKeyDown={handleListKeyDown}>
+                    <MenuItem linkButton={true} href='/PriceOffer'>
+                      Naceniť strechu
+                    </MenuItem>
                     <MenuItem onClick={handleClose}>My account</MenuItem>
                     <MenuItem onClick={handleClose}>Logout</MenuItem>
                   </MenuList>

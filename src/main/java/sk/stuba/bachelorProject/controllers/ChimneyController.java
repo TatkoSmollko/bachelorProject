@@ -4,6 +4,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sk.stuba.bachelorProject.model.Attic;
 import sk.stuba.bachelorProject.model.Chimney;
 import sk.stuba.bachelorProject.services.ChimneyService;
 
@@ -24,6 +25,11 @@ public class ChimneyController {
     @GetMapping("getChimneyById/{id}")
     public Chimney getChimneyById(@PathVariable(name = "id") String id) {
         return chimneyService.getChimneyById(id);
+    }
+
+    @GetMapping("getAllChimneysByRoofId/{id}")
+    public List<Chimney> getAllChimneysByRoofId(@PathVariable(name = "id") String roofId) {
+        return chimneyService.getAllChimneysByRoofId(roofId);
     }
 
     @GetMapping("getAllChimneys")

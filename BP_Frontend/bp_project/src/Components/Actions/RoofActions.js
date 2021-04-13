@@ -1,25 +1,25 @@
 import axios from 'axios';
 import { apiTarget } from '../Global/globalVariables';
 
-export function createEmptyRoof(data, props, onSuccess) {
+export function createEmptyRoof(data, onSuccess) {
   const config = {
     method: 'POST',
-    url:  'http://localhost:8080/api/roof/createEmptyRoof',
+    url: 'http://localhost:8080/api/roof/createEmptyRoof',
     responseType: 'json',
     headers: {
       Authorization: 'Basic ' + btoa('mia-dms-gui:secret'),
-      "Content-Type": "application/json",
-  },
+      'Content-Type': 'application/json'
+    },
     params: {
       access_token: localStorage.getItem('access_token')
-      },
-      data:data
+    },
+    data: data
   };
   axios
     .request(config)
     .then(response => {
-      localStorage.setItem("newRoofId", response.data.id);
-      onSuccess();
+      localStorage.setItem('newRoofId', response.data.id);
+      onSuccess(response.data.id);
     })
     .catch(error => {
       if (error.response !== undefined) {
