@@ -5,7 +5,7 @@ import createEmptyRoof from '../../Actions/RoofActions';
 import AddAttic from '../../Modals/NewAtticModal';
 import { createAttic, getAllAtticsByRoofId } from '../../Actions/AtticActions';
 import AddChimney from '../../Modals/NewChimneyModal';
-import finishPriceOffer from '../../Actions/PriceOfferActions';
+import { finishPriceOffer } from '../../Actions/PriceOfferActions';
 import { getAllChimneysByRoofId } from '../../Actions/ChimneyActions';
 
 class NewPriceOfferForm extends Component {
@@ -48,18 +48,6 @@ class NewPriceOfferForm extends Component {
       this.setState({ atiky: response.data });
     });
   };
-
-  // componentDidMount() {}
-
-  // componentDidUpdate() {
-  //   this.dataToCreateEmptyRoof.heigth = this.state.heigth;
-  //   this.dataToCreateEmptyRoof.length = this.state.length;
-  // }
-
-  // updateIdRoof = () => {
-  //   this.setState({ id: localStorage.getItem('newRoofId') });
-  //   console.log(this.state.id);
-  // };
 
   handleFinishPriceOfferProces = (roofId, customer) => {
     finishPriceOffer(roofId, customer, () => {
@@ -152,7 +140,7 @@ class NewPriceOfferForm extends Component {
               <div className='atiky'>
                 <h2>ATIKY</h2>
                 <Button
-                  className='uploadButton'
+                  className='uploadButtonAttic'
                   variant='contained'
                   color='default'
                   onClick={() => this.toggleNewAtticModal()}
@@ -170,7 +158,7 @@ class NewPriceOfferForm extends Component {
               <div className='atiky'>
                 <h2>KOMÍNY</h2>
                 <Button
-                  className='uploadButton'
+                  className='uploadButtonChimney'
                   variant='contained'
                   color='default'
                   onClick={() => this.toggleNewChimneyModal()}

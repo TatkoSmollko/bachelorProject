@@ -4,6 +4,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import sk.stuba.bachelorProject.enums.PriceOfferStatus;
 import sk.stuba.bachelorProject.model.*;
 import sk.stuba.bachelorProject.repositories.PriceOfferRepository;
@@ -24,24 +25,40 @@ public class PriceOfferService {
     @Autowired
     XlsService xlsService;
 
-    public PriceOffer createOffer (PriceOffer priceOffer){
+    public PriceOffer createOffer(PriceOffer priceOffer) {
         priceOffer.setCustomerName(priceOffer.getCustomerName());
         priceOffer.setStatus(PriceOfferStatus.NEW);
         priceOffer.setItems(new ArrayList<>());
         return priceOfferRepository.save(priceOffer);
     }
 
-    public void finishPriceOffer(String name,String priceOfferId) throws IOException, InvalidFormatException {
-        xlsService.createPriceOfferExcel(name,priceOfferId);
+    public void finishPriceOffer(String name, String priceOfferId) throws IOException, InvalidFormatException {
+        xlsService.createPriceOfferExcel(name, priceOfferId);
     }
 
     public PriceOffer createPriceOffer(PriceOffer priceOffer, String roofId) {
         Roof roof = roofRepository.findById(roofId).orElseThrow(() -> new ObjectNotFoundException("id", roofId));
         priceOffer.setCustomerName(priceOffer.getCustomerName());
-        for(UsedItem item : roof.getItems()){
+        for (UsedItem item : roof.getItems()) {
             priceOffer.getItems().add(item);
         }
         return priceOfferRepository.save(priceOffer);
+    }
+
+    public void updateStatusPriceOffer(@PathVariable String id, PriceOffer priceOffer) {
+        if (priceOffer.getStatus() == PriceOfferStatus.ACCEPTED) {
+            //musim prejst vsetky polozky v sklade a dostupne vymazat
+            //ak je poloziek menej, odpocitam to, co je na sklade + potrebujem dat oznam, kolko treba dokupit
+            //zmenim stav cenovej ponuky na akceptovana
+            for (UsedItem usedItem : priceOffer.getItems()) {
+
+            }
+
+
+        } else if (priceOffer.getStatus() == PriceOfferStatus.DECLINED) {
+
+        }
+
     }
 
     public PriceOffer getPriceOfferById(String id) {
@@ -79,25 +96,23 @@ public class PriceOfferService {
     }
 
     /**
-     *
      * @param roof
      * @return counted srews . There must be 6 screws in one square meter.
      */
-    public double calculateNeededScrews(Roof roof){
-        return roof.getHeigth() * roof.getLength()*6;
+    public double calculateNeededScrews(Roof roof) {
+        return roof.getHeigth() * roof.getLength() * 6;
     }
 
     /**
-     *
      * @param roof
      * @return count of needed cornerSlats.
      */
-    public double calculateNeededCornerSlat(Roof roof){
-        Double size=0.0;
-        for(Attic attic: roof.getAttics()){
+    public double calculateNeededCornerSlat(Roof roof) {
+        Double size = 0.0;
+        for (Attic attic : roof.getAttics()) {
             size += attic.getLength();
         }
-        return size/2.5;
+        return size / 2.5;
     }
 
     /**

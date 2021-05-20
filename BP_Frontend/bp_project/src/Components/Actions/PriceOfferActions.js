@@ -71,4 +71,31 @@ export function finishPriceOffer(roofId, customer, finish) {
     });
 }
 
-export default finishPriceOffer;
+export function getAllPriceOffers(onSuccess) {
+  const config = {
+    method: 'GET',
+    url: 'http://localhost:8080/api/priceOffer/getAllPriceOffers',
+    responseType: 'json',
+    headers: {
+      Authorization: 'Basic ' + btoa('mia-dms-gui:secret'),
+      'Content-Type': 'application/json'
+    },
+    params: {
+      access_token: localStorage.getItem('access_token')
+    }
+  };
+  axios
+    .request(config)
+    .then(response => {
+      onSuccess(response.data);
+    })
+    .catch(error => {
+      if (error.response !== undefined) {
+        if (error.response.status === 401) {
+          console.log(error.response);
+        }
+        if (error.response.status === 403) {
+        }
+      }
+    });
+}

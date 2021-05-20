@@ -1,29 +1,19 @@
-import React, { useState, useEffect} from 'react'; 
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { useInterval } from './Components/Global/useInterval';
 import Home from './Components/Home';
 import Login from './Components/Login';
-import PriceOffer from './Components/PriceOffer'
-import {logout} from './Components/Actions/Logout';
-
-
-
+import PriceOffer from './Components/PriceOffer';
+import { logout } from './Components/Actions/Logout';
+import StoreView from './Components/StoreView';
 
 // List of routes that uses the page layout
 // listed here to Switch between layouts
 // depending on the current pathname
 
-
-const listofPages = [
-  '/login',
-  '/home',
-  '/priceOffer'
-];
-
-
-
+const listofPages = ['/login', '/home', '/priceOffer'];
 
 const PrivateRoute = ({ component: Component, handleNotification, ...rest }) => (
   <Route
@@ -54,7 +44,6 @@ const Routes = ({ location }) => {
       this.setMinutes(this.getMinutes() + minutes);
       return this;
     };
-
 
     accessToken = localStorage.getItem('access_token');
     if (accessToken === null) {
@@ -89,50 +78,37 @@ const Routes = ({ location }) => {
     }
   }, [accessToken, timer]);
 
-
   const animationName = 'rag-fadeIn';
 
-  if (listofPages.indexOf(location.pathname) > -1 || !localStorage.getItem('access_token')|| localStorage.getItem('expires_in') <= 0) {
+  if (
+    listofPages.indexOf(location.pathname) > -1 ||
+    !localStorage.getItem('access_token') ||
+    localStorage.getItem('expires_in') <= 0
+  ) {
     return (
       // Page Layout component wrapper
-        <Switch location={location}>
-          <Route path='/login' component={Login} />
-          <Route path='*' render={() => <Redirect to='/login' />} />
-        </Switch>
+      <Switch location={location}>
+        <Route path='/login' component={Login} />
+        <Route path='*' render={() => <Redirect to='/login' />} />
+      </Switch>
     );
   } else {
     return (
       <>
         {/* {redirect ? <Redirect to="/login" /> : ""} */}
-          <TransitionGroup>
-            <CSSTransition
-              key={currentKey}
-              timeout={timeout}
-              classNames={animationName}
-              exit={false}
-            >
-              <React.Fragment>
-                <Switch location={location}>
-                  <PrivateRoute
-                    exact
-                    path='/'
-                    component={Home}
-                  />
-                  <PrivateRoute
-                    exact
-                    path='/home'
-                    component={Home}
-                  />
-                    <PrivateRoute
-                    exact
-                    path='/PriceOffer'
-                    component={PriceOffer}
-                  />
-                 {/* <PrivateRoute exact path='/workflows' component={Workflows} /> */}
-                </Switch>
-              </React.Fragment>
-            </CSSTransition>
-          </TransitionGroup>
+        <TransitionGroup>
+          <CSSTransition key={currentKey} timeout={timeout} classNames={animationName} exit={false}>
+            <React.Fragment>
+              <Switch location={location}>
+                <PrivateRoute exact path='/' component={Home} />
+                <PrivateRoute exact path='/home' component={Home} />
+                <PrivateRoute exact path='/PriceOffer' component={PriceOffer} />
+                <PrivateRoute exact path='/StoreView' component={StoreView} />
+                {/* <PrivateRoute exact path='/workflows' component={Workflows} /> */}
+              </Switch>
+            </React.Fragment>
+          </CSSTransition>
+        </TransitionGroup>
       </>
     );
   }

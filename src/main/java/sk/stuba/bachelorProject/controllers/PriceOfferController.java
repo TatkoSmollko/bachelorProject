@@ -54,4 +54,10 @@ public class PriceOfferController {
         Roof roof = roofService.getRoofById(id);
         return priceOfferService.calculateNeededFoil(roof);
     }
+
+    @PutMapping("updatePriceOfferr/{id}")
+    public void updateStatusPriceOffer(@PathVariable String id, PriceOffer priceOffer) {
+
+        System.out.println('j');
+    }
 }

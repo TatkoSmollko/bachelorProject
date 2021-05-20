@@ -57,7 +57,7 @@ public class PostConstructOperation {
     public static final String DEFAULT_ID_FATRAFOL = "a287899a-6cc1-11eb-9439-0242ac130002";
     public static final String DEFAULT_ID_LISTEL = "a2878ec2-6cc1-11eb-9439-0242ac130002";
     public static final String DEFAULT_ID_SKREW = "a2878fd0-6cc1-11eb-9439-0242ac130002";
-    public static final String DEFAULT_ID_GUTTER = "a2879098-6cc1-11eb-9439-0242ac130002\n";
+    public static final String DEFAULT_ID_GUTTER = "a2879098-6cc1-11eb-9439-0242ac130002";
     public static final String DEFAULT_ID_LUTE = "a287914c-6cc1-11eb-9439-0242ac130002";
 
 

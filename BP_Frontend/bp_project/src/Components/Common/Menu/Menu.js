@@ -6,8 +6,8 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
 import '../Menu/Menu.scss';
 
 const useStyles = makeStyles(theme => ({
@@ -34,11 +34,6 @@ export default function MenuListComposition() {
     setOpen(false);
   };
 
-  const handleRedirect = path => {
-    console.log('kokot');
-    history.push(path);
-  };
-
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -60,10 +55,21 @@ export default function MenuListComposition() {
     <div className={(classes.root, 'menuStyle')}>
       <Paper className={classes.paper}>
         <MenuList>
-          <MenuItem>Cenové ponuky</MenuItem>
-          <MenuItem>Naceniť strechu</MenuItem>
-          <MenuItem>Materiál</MenuItem>
-          <MenuItem>Nastavenia</MenuItem>
+          <MenuItem>
+            <NavLink className='navbar-item' activeClassName='is-active' to='/'>
+              Cenové ponuky
+            </NavLink>
+          </MenuItem>
+          <MenuItem>
+            <NavLink className='navbar-item' activeClassName='is-active' to='/PriceOffer'>
+              Naceniť strechu
+            </NavLink>
+          </MenuItem>
+          <MenuItem>
+            <NavLink className='navbar-item' activeClassName='is-active' to='/StoreView'>
+              Materiál v sklade
+            </NavLink>
+          </MenuItem>
         </MenuList>
       </Paper>
       <div>

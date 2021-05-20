@@ -4,14 +4,11 @@ package sk.stuba.bachelorProject.services;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sk.stuba.bachelorProject.model.Item;
 import sk.stuba.bachelorProject.model.PriceOffer;
 import sk.stuba.bachelorProject.model.UsedItem;
 import sk.stuba.bachelorProject.repositories.PriceOfferRepository;

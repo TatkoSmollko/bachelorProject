@@ -1,10 +1,8 @@
-import React, { Component } from "react";
-import HomeScreenGrid from "../HomeScreenGrid/HomeScreenGrid";
+import React, { Component } from 'react';
+import HomeScreenGrid from '../HomeScreenGrid/HomeScreenGrid';
 import TableNavbar from '../TableNavbarButtons/TableNavbarButton';
-import "./ScreenRightSide.scss";
+import './ScreenRightSide.scss';
 
-
- 
 class ScreenRightSide extends Component {
   render() {
     return (
@@ -14,10 +12,8 @@ class ScreenRightSide extends Component {
         </div>
         <HomeScreenGrid></HomeScreenGrid>
       </div>
-      
-      
     );
   }
 }
- 
+
 export default ScreenRightSide;

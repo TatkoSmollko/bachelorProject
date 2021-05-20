@@ -17,6 +17,11 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
+    public List<Item> getAllItemsByStoreId(String id){
+        return itemRepository.findByStoreId(id);
+    }
+
+
     public Item getItemById(String id) {
         return itemRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("id", id));
     }

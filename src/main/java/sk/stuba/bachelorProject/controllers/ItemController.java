@@ -26,7 +26,7 @@ public class ItemController {
     }
 
     @PutMapping("updateItem/{id}")
-    public Item updateItem(String id, Item item) {
+    public Item updateItem(@PathVariable  String id, @RequestBody Item item) {
         return itemService.updateItem(id, item);
     }
 
@@ -34,6 +34,12 @@ public class ItemController {
     public List<Item> getAllItems() {
         return itemService.getAllItems();
     }
+
+    @GetMapping("getByStore/{storeId}")
+    public List<Item> getAllItemsByStoreId(@PathVariable String storeId){
+        return itemService.getAllItemsByStoreId(storeId);
+    }
+
 
     @DeleteMapping("deleteItem/{id}")
     public void deleteItem(@PathVariable(name = "id") String id) {
