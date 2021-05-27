@@ -7,6 +7,7 @@ import { createAttic, getAllAtticsByRoofId } from '../../Actions/AtticActions';
 import AddChimney from '../../Modals/NewChimneyModal';
 import { finishPriceOffer } from '../../Actions/PriceOfferActions';
 import { getAllChimneysByRoofId } from '../../Actions/ChimneyActions';
+import { ArrowBackIosSharp } from '@material-ui/icons';
 
 class NewPriceOfferForm extends Component {
   constructor(props) {
@@ -98,6 +99,7 @@ class NewPriceOfferForm extends Component {
                 onChange={e => this.setState({ customerName: e.target.value })}
               />
               <Button
+                style={{ marginTop: '30px' }}
                 variant='contained'
                 color='default'
                 onClick={() => this.startProcessOfPriceOffer()}
@@ -149,7 +151,9 @@ class NewPriceOfferForm extends Component {
                 </Button>
                 <div style={{ overflow: 'auto', heigth: '250px' }}>
                   {this.state.atiky.map(atika => (
-                    <div key={atika.id}>{atika.id}</div>
+                    <div key={atika.id}>
+                      {atika.frontHeight}x{atika.rareHeight}x{atika.width}x{atika.length}
+                    </div>
                   ))}
                 </div>
               </div>
@@ -167,7 +171,9 @@ class NewPriceOfferForm extends Component {
                 </Button>
                 <div style={{ overflow: 'auto', heigth: '250px' }}>
                   {this.state.chimneys.map(chimney => (
-                    <div key={chimney.id}>{chimney.id}</div>
+                    <div key={chimney.id}>
+                      {chimney.width}x{chimney.heigth}
+                    </div>
                   ))}
                 </div>
               </div>

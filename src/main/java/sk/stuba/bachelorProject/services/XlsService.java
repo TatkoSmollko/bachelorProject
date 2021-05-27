@@ -34,14 +34,19 @@ public class XlsService {
         HSSFWorkbook workbookoutput=workbookinput;
         Sheet sheet = workbookoutput.getSheetAt(0);
         int startIndex = 19;
+        double price = 0;
+        sheet.getRow(8).getCell(3).setCellValue(priceOffer.getCustomerName());
         for(UsedItem item:priceOffer.getItems()){
             sheet.getRow(startIndex).getCell(0).setCellValue(item.getParentItem().getName());
             sheet.getRow(startIndex).getCell(1).setCellValue(item.getCount());
+            price=item.getCount()*item.getParentItem().getPrice();
+            sheet.getRow(startIndex).getCell(6).setCellValue(price);
             startIndex++;
         }
+        sheet.getRow(48).getCell(6).setCellValue(price);
 
-    //To write your changes to new workbook
-        FileOutputStream out = new FileOutputStream("/Users/tomasvago/Downloads/bachelorProject/ponukaVzor2.xls");
+        FileOutputStream out = new FileOutputStream("/Users/tomasvago/Downloads/bachelorProject/" +
+                ""+priceOffer.getCustomerName()+".xls");
         workbookoutput.write(out);
         out.close();
     }

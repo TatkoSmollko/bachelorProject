@@ -99,3 +99,33 @@ export function getAllPriceOffers(onSuccess) {
       }
     });
 }
+
+export function updatePriceOffer(priceOfferId, data, onSuccess) {
+  const config = {
+    method: 'PUT',
+    url: 'http://localhost:8080/api/priceOffer/updatePriceOffer/' + priceOfferId,
+    responseType: 'json',
+    headers: {
+      Authorization: 'Basic ' + btoa('mia-dms-gui:secret'),
+      'Content-Type': 'application/json'
+    },
+    data: data,
+    params: {
+      access_token: localStorage.getItem('access_token')
+    }
+  };
+  axios
+    .request(config)
+    .then(response => {
+      onSuccess(response.data);
+    })
+    .catch(error => {
+      if (error.response !== undefined) {
+        if (error.response.status === 401) {
+          console.log(error.response);
+        }
+        if (error.response.status === 403) {
+        }
+      }
+    });
+}

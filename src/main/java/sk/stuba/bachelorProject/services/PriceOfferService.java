@@ -33,6 +33,14 @@ public class PriceOfferService {
     }
 
     public void finishPriceOffer(String name, String priceOfferId) throws IOException, InvalidFormatException {
+        PriceOffer priceOffer = priceOfferRepository.getOne(priceOfferId);
+        priceOffer.setCustomerName(name);
+        double price = 0;
+        for(UsedItem item : priceOffer.getItems()){
+            price += (item.getCount()*item.getParentItem().getPrice());
+        }
+        priceOffer.setPrice(price);
+        priceOfferRepository.save(priceOffer);
         xlsService.createPriceOfferExcel(name, priceOfferId);
     }
 
@@ -76,8 +84,6 @@ public class PriceOfferService {
 
     public PriceOffer updatePriceOffer(String id, PriceOffer priceOffer) {
         PriceOffer priceOfferToUpdate = priceOfferRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("id", id));
-        priceOfferToUpdate.setItems(priceOffer.getItems());
-        priceOfferToUpdate.setCustomerName(priceOffer.getCustomerName());
         priceOfferToUpdate.setStatus(priceOffer.getStatus());
         return priceOfferRepository.save(priceOfferToUpdate);
     }
@@ -111,6 +117,10 @@ public class PriceOfferService {
         Double size = 0.0;
         for (Attic attic : roof.getAttics()) {
             size += attic.getLength();
+        }
+
+        for(Chimney chimney : roof.getChimneys()){
+            size +=( chimney.getWidth()*2 + chimney.getHeigth()*2);
         }
         return size / 2.5;
     }

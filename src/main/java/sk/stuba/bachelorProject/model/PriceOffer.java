@@ -21,6 +21,8 @@ public class PriceOffer {
     @Column
     private String customerName;
     @Column
+    private Double price;
+    @Column
     private PriceOfferStatus status;
     @OneToMany(mappedBy = "priceOffer")
     private List<UsedItem> items;
@@ -29,11 +31,12 @@ public class PriceOffer {
         super();
     }
 
-    public PriceOffer(String customerName, PriceOfferStatus status, List<UsedItem> items) {
+    public PriceOffer(String customerName, PriceOfferStatus status, List<UsedItem> items, Double price) {
         super();
         this.customerName = customerName;
         this.status = status;
         this.items = items;
+        this.price = price;
     }
 
     @Override
@@ -69,6 +72,14 @@ public class PriceOffer {
 
     public void setStatus(PriceOfferStatus status) {
         this.status = status;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public List<UsedItem> getItems() {
