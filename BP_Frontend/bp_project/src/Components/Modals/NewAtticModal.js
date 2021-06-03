@@ -42,7 +42,7 @@ const AddAttic = props => {
       <ModalBody>
         <Form>
           <FormGroup>
-            <Label for='frontHeigth'>Front Heigth</Label>
+            <Label for='frontHeigth'> Predná výška</Label>
             <Input
               type='text'
               name='frontHeigth'
@@ -50,7 +50,7 @@ const AddAttic = props => {
               onChange={e => setfrontHeight(e.target.value)}
               placeholder='Predna vyska atiky'
             />
-            <Label for='rareHeigth'>Rare Heigth</Label>
+            <Label for='rareHeigth'>Zadná výška</Label>
             <Input
               type='text'
               name='rareHeigth'
@@ -58,7 +58,7 @@ const AddAttic = props => {
               onChange={e => setrareHeight(e.target.value)}
               placeholder='Zadna vyska atiky'
             />
-            <Label for='width'>Width</Label>
+            <Label for='width'>Šírka</Label>
             <Input
               type='text'
               name='width'
@@ -66,7 +66,7 @@ const AddAttic = props => {
               onChange={e => setWidth(e.target.value)}
               placeholder='Sirka strechy'
             />
-            <Label for='lenth'>Length</Label>
+            <Label for='lenth'>Dĺžka</Label>
             <Input
               type='text'
               name='length'

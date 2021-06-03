@@ -38,7 +38,7 @@ const AddChimney = props => {
       <ModalBody>
         <Form>
           <FormGroup>
-            <Label for='width'>Width</Label>
+            <Label for='width'>Šírka</Label>
             <Input
               type='text'
               name='width'
@@ -46,7 +46,7 @@ const AddChimney = props => {
               onChange={e => setWidth(e.target.value)}
               placeholder='Sirka komina'
             />
-            <Label for='lenth'>Heigth</Label>
+            <Label for='lenth'>Dĺžka</Label>
             <Input
               type='text'
               name='Heigth'
